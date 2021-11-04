@@ -19,7 +19,7 @@ folder_pdf_search.py utilizes the above functions to run searches of PDFs throug
 
 4. There are occasionally PDFs which the program can't open (PDF urls with spaces throw it off, for example), which is frustrating. The output at the bottom of the page will tell you which files were not read. As time permits, these issues will be ironed out.
 
-The search is NOT case-sensitive.
+The search is not case-sensitive.
 
 ---
 

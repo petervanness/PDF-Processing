@@ -95,6 +95,7 @@ outname = out_folder+Keywords[:30].replace(delimiter,'_').replace(' ','')+'.csv'
 
 if len(in_folder) == 0:
     print('-----------No input folder detected; enter one to run search---------')
+    exit()
 
 in_folder = folder_structuring(in_folder)
 

@@ -8,7 +8,7 @@ PDF_to_Text.py is one of the base functions and converts PDFs to string readable
 
 PDF_Text_Search.py is another base function that searches the parsed PDF text for user-specified keywords and returns a pandas dataframe with the references to the keywords and corresponding file paths/URLs.
 
-The URL_PDF_Search jupyter notebook includes very high level instructions because that version was intended to be widely distributed to non-coding folks on Google Colab. 
+The URL_PDF_Search jupyter notebook includes very high level instructions because that version was intended to be distributed on Google Colab to non-coding folks. 
 
 folder_pdf_search.py utilizes the above functions to run searches of PDFs through a local folder.
 

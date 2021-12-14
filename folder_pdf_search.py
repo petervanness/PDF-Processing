@@ -4,7 +4,7 @@ delimiter = "|" #@param ["|", ",", ";"]
 Keywords = input("Enter words of interest separated by {}: ".format(delimiter))
 out_folder = input("Optional: Enter folder in which to place file with keyword references: ")
 #------------------------------------------------------------------------------------------------------------------------------------
-
+from PDF_to_Text import *
 import glob
 import io
 import os
@@ -32,21 +32,6 @@ def pull_keywords(keywords, text, filename):
             tmp = pd.DataFrame({'Keyword':[keyword],'Reference':[text[i-50:i+50].replace("\n"," ")],'File':[str(filename.split('/')[-1])],'Full Path':[filename]})
             out_df = out_df.append(tmp)
     return out_df
-
-
-def pdf_to_text(in_file):
-    output_string = io.StringIO()
-    parser = PDFParser(in_file)
-    doc = PDFDocument(parser)
-    if not doc.is_extractable:
-        raise PDFTextExtractionNotAllowed
-    rsrcmgr = PDFResourceManager()
-    device = TextConverter(rsrcmgr, output_string, laparams=LAParams())
-    interpreter = PDFPageInterpreter(rsrcmgr, device)
-    for page in PDFPage.create_pages(doc):
-        interpreter.process_page(page)
-    text = output_string.getvalue()
-    return text
 
 
 def pull_pdfs_folder(in_folder, keywords, out_path):
@@ -89,15 +74,27 @@ def folder_structuring(folder):
         folder = folder + '/'
     return folder
 
-#set output file name and use user-designated path if applicable
-out_folder = folder_structuring(out_folder)
-outname = out_folder+Keywords[:30].replace(delimiter,'_').replace(' ','')+'.csv'
-
 if len(in_folder) == 0:
     print('-----------No input folder detected; enter one to run search---------')
     exit()
 
 in_folder = folder_structuring(in_folder)
+
+#set output file name and use user-designated path if applicable
+user_out_path = folder_structuring(user_out_path)
+
+if len(user_outfile)>0 and user_outfile[:-4] != '.csv':
+    final_outfile = user_outfile+'.csv'
+
+if len(user_outfile) == 0:
+    final_outfile = Keywords[:30].replace(delimiter,'_').replace(' ','')+'.csv'
+
+if len(user_out_path) == 0:
+    final_out_path = in_folder
+elif len(user_out_path) > 0:
+    final_out_path = user_out_path
+
+final_out_full = final_out_path+final_outfile
 
 if len(Keywords) == 0:
     Keywords = ['marginal cost', 'endogenous growth']

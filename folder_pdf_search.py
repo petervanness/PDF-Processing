@@ -4,7 +4,9 @@ delimiter = "|" #@param ["|", ",", ";"]
 Keywords = input("Enter words of interest separated by {}: ".format(delimiter))
 out_folder = input("Optional: Enter folder in which to place file with keyword references: ")
 #------------------------------------------------------------------------------------------------------------------------------------
-from PDF_to_Text import *
+from PDF_to_Text import pdf_to_text
+from PDF_Text_Search import pull_keywords
+
 import glob
 import io
 import os
